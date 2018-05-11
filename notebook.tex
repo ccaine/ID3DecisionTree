@@ -1,0 +1,1205 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ID3 Decision Tree}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{Cindey Caine A10834042}\label{cindey-caine-a10834042}
+
+\subsection{CSE 151 PA2}\label{cse-151-pa2}
+
+    \subsection{1. First 3 levels of tree}\label{first-3-levels-of-tree}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{Image}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{diagram.png}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+\texttt{\color{outcolor}Out[{\color{outcolor}39}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \subsection{2. Training and Test Error}\label{training-and-test-error}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training Error: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{trainErr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Training Error: 0.0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Error: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{testErr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test Error: 0.186
+
+    \end{Verbatim}
+
+    \subsection{3. Validation and Test Error post
+Pruning}\label{validation-and-test-error-post-pruning}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Validation Error(1 Prune): }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{postPrune}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Error(1 Prune): }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{postPrune}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Validation Error(1 Prune): 0.121
+Test Error(1 Prune): 0.127
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Validation Error(2 Prune): }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{postPrune}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Error(2 Prune): }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{postPrune}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Validation Error(2 Prune): 0.12
+Test Error(2 Prune): 0.127
+
+    \end{Verbatim}
+
+    \subsection{4. The most prominent feature would be feature 5 or
+"PAYMENT\_DELAY\_SEPTEMBER" for predicting credit card fraud. This is
+because feature 5 had the lowest conditional entropy. Therefore, the
+tree decided to split based on this feature since it would make the
+"purest" impure node
+splits.}\label{the-most-prominent-feature-would-be-feature-5-or-payment_delay_september-for-predicting-credit-card-fraud.-this-is-because-feature-5-had-the-lowest-conditional-entropy.-therefore-the-tree-decided-to-split-based-on-this-feature-since-it-would-make-the-purest-impure-node-splits.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+         \PY{k+kn}{from} \PY{n+nn}{copy} \PY{k}{import} \PY{n}{deepcopy}
+         \PY{k+kn}{from} \PY{n+nn}{random} \PY{k}{import} \PY{n}{randint}
+         \PY{k+kn}{from} \PY{n+nn}{queue} \PY{k}{import} \PY{o}{*}
+         \PY{k+kn}{from} \PY{n+nn}{collections} \PY{k}{import} \PY{n}{Counter}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Read in data}
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../pa2train.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{train} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+        \PY{n}{train} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{train}\PY{p}{]} 
+        
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../pa2validation.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{val} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+        \PY{n}{val} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{val}\PY{p}{]} 
+        
+        \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../pa2test.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+            \PY{n}{test} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+        \PY{n}{test} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{test}\PY{p}{]} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} create empty lists for data sorting}
+        \PY{n}{trainData} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{trainLabel} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{n}{valData} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{valLabel} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{n}{testData} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{testLabel} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Remove spaces and split into label/data}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{train}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{train}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{train}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{trainLabel}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{22}\PY{p}{]}\PY{p}{)}
+            \PY{n}{trainData}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{22}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{val}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{val}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{val}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{valLabel}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{22}\PY{p}{]}\PY{p}{)}
+            \PY{n}{valData}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{val}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{22}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{test}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{test}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{test}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{testLabel}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{22}\PY{p}{]}\PY{p}{)}
+            \PY{n}{testData}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{22}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} convert label string to int}
+        \PY{n}{trainLabel} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{trainLabel}\PY{p}{]}
+        
+        \PY{n}{valLabel} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{valLabel}\PY{p}{]}
+        
+        \PY{n}{testLabel} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{i}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{testLabel}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} convert data string to int}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{trainData}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{trainData}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{j}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{trainData}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}
+            
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{valData}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{valData}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{j}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{valData}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}
+            
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{testData}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{testData}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{j}\PY{p}{)} \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n}{testData}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{class} \PY{n+nc}{Node}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{left\PYZus{}child} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{right\PYZus{}child} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{rule} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{labelsCount} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{parent} \PY{o}{=} \PY{k+kc}{None}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{side} \PY{o}{=} \PY{k+kc}{None}
+        \PY{k}{class} \PY{n+nc}{Tree}\PY{p}{:}
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{root} \PY{o}{=} \PY{k+kc}{None}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{calcLog}\PY{p}{(}\PY{n}{prob}\PY{p}{)}\PY{p}{:}
+            \PY{k}{if}\PY{p}{(}\PY{n}{prob} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+                \PY{k}{return} \PY{l+m+mf}{0.0}
+            \PY{k}{else}\PY{p}{:}
+                \PY{k}{return} \PY{p}{(}\PY{n}{prob}\PY{p}{)}\PY{o}{*}\PY{n}{math}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{prob}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k}{def} \PY{n+nf}{splitData}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+            \PY{n}{featEn} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+            \PY{c+c1}{\PYZsh{} for i from 0 to number of features(\PYZsh{} of columns)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{column} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                \PY{n}{threshold} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+                \PY{c+c1}{\PYZsh{} for j from 0 to number of data points(\PYZsh{} of rows)}
+                \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{c+c1}{\PYZsh{} getting each i feature value in the j column}
+                    \PY{n}{column}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} get n unique values in the feature}
+                \PY{n}{uFeat} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{column}\PY{p}{)}\PY{p}{)}
+        
+                \PY{n}{uFeat}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+                
+                \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{uFeat}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}     
+                    \PY{c+c1}{\PYZsh{} get thresholds between each unique value for n\PYZhy{}1 threshold values}
+                    \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{uFeat}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{threshold}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{uFeat}\PY{p}{[}\PY{n}{k}\PY{p}{]}\PY{o}{+}\PY{n}{uFeat}\PY{p}{[}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+                    
+                    \PY{n}{condEn} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+                    \PY{c+c1}{\PYZsh{} for m from 0 to number of thresholds(n\PYZhy{}1)}
+                    \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{threshold}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                        \PY{n}{numLess} \PY{o}{=} \PY{l+m+mi}{0}
+                        \PY{n}{lessYes} \PY{o}{=} \PY{l+m+mi}{0}
+                        \PY{n}{lessNo} \PY{o}{=} \PY{l+m+mi}{0}
+                        \PY{n}{greatYes} \PY{o}{=} \PY{l+m+mi}{0}
+                        \PY{n}{greatNo} \PY{o}{=} \PY{l+m+mi}{0}
+                
+                        \PY{c+c1}{\PYZsh{} count number of features less than the threshold (P(feature) = [probLess,probGreat])}
+                        \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{column}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                            \PY{k}{if}\PY{p}{(}\PY{n}{column}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{threshold}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                                \PY{k}{if}\PY{p}{(}\PY{n}{labels}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                                    \PY{n}{lessYes} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                                \PY{k}{else}\PY{p}{:}
+                                    \PY{n}{lessNo} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                                \PY{n}{numLess} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                            \PY{k}{else}\PY{p}{:}
+                                \PY{k}{if}\PY{p}{(}\PY{n}{labels}\PY{p}{[}\PY{n}{n}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                                    \PY{n}{greatYes} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                                \PY{k}{else}\PY{p}{:}
+                                    \PY{n}{greatNo} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                        
+                        \PY{c+c1}{\PYZsh{} (P(feature) = [probLess,probGreat])               }
+                        \PY{n}{probLess} \PY{o}{=} \PY{n}{numLess}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{column}\PY{p}{)}
+                        \PY{n}{probGreat} \PY{o}{=} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{column}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{numLess}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{column}\PY{p}{)}
+            
+                        \PY{c+c1}{\PYZsh{} P(label|feature \PYZlt{} threshold)}
+                        \PY{n}{less} \PY{o}{=} \PY{p}{(}\PY{n}{lessYes}\PY{o}{/}\PY{n}{numLess}\PY{p}{,}\PY{n}{lessNo}\PY{o}{/}\PY{n}{numLess}\PY{p}{)}
+                        \PY{c+c1}{\PYZsh{} P(label|feature \PYZgt{}= threshold)}
+                        \PY{n}{great} \PY{o}{=} \PY{p}{(}\PY{n}{greatYes}\PY{o}{/}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{column}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{numLess}\PY{p}{)}\PY{p}{,}\PY{n}{greatNo}\PY{o}{/}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{column}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{numLess}\PY{p}{)}\PY{p}{)}
+            
+                        \PY{c+c1}{\PYZsh{} calculate cond entropy}
+                        \PY{n}{en} \PY{o}{=} \PY{n}{probLess}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{calcLog}\PY{p}{(}\PY{n}{less}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{calcLog}\PY{p}{(}\PY{n}{less}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{+} \PY{n}{probGreat}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{calcLog}\PY{p}{(}\PY{n}{great}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{calcLog}\PY{p}{(}\PY{n}{great}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            
+                        \PY{c+c1}{\PYZsh{} append threshold value and its entropy to list}
+                        \PY{n}{condEn}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{threshold}\PY{p}{[}\PY{n}{m}\PY{p}{]}\PY{p}{,} \PY{n}{en}\PY{p}{)}\PY{p}{)}
+                
+               
+                    \PY{c+c1}{\PYZsh{} sort entropy for that feature}
+                    \PY{n}{condEn}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{tup}\PY{p}{:} \PY{n}{tup}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} 
+        
+                    \PY{c+c1}{\PYZsh{} put the lowest entropy of each feat in a list}
+                    \PY{n}{featEn}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{condEn}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{condEn}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{i}\PY{p}{)}\PY{p}{)}
+                    
+            \PY{n}{featEn}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{p}{)}
+            
+            \PY{k}{return} \PY{n}{featEn}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k}{def} \PY{n+nf}{setSplit}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{rule}\PY{p}{,}\PY{n}{labels}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} left and right data + label}
+             \PY{n}{left} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{leftLabel} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{right} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{rightLabel} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} for each i data point}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} check if the data point in the feature is \PYZlt{} lowest entropy threshold chosen}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{rule}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{rule}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{left}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{leftLabel}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{labels}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{right}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{rightLabel}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{labels}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} return left data + label and right data + label}
+             \PY{k}{return} \PY{n}{left}\PY{p}{,} \PY{n}{right}\PY{p}{,} \PY{n}{leftLabel}\PY{p}{,} \PY{n}{rightLabel}       
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{c+c1}{\PYZsh{} create new tree}
+         \PY{n}{id3Tree} \PY{o}{=} \PY{n}{Tree}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} create root node for the tree}
+         \PY{n}{rootNode} \PY{o}{=} \PY{n}{Node}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} give it the training data}
+         \PY{n}{rootNode}\PY{o}{.}\PY{n}{rule} \PY{o}{=} \PY{n}{trainData}
+         \PY{n}{rootNode}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{n}{trainLabel}
+         
+         \PY{c+c1}{\PYZsh{} assign root to tree}
+         \PY{n}{id3Tree}\PY{o}{.}\PY{n}{root} \PY{o}{=} \PY{n}{rootNode}
+         
+         \PY{c+c1}{\PYZsh{} create queue for iteration and add root node}
+         \PY{n}{nodeQueue} \PY{o}{=} \PY{n}{Queue}\PY{p}{(}\PY{p}{)}
+         \PY{n}{nodeQueue}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{rootNode}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{while}\PY{p}{(}\PY{n}{nodeQueue}\PY{o}{.}\PY{n}{qsize}\PY{p}{(}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} get out the top node in queue}
+             \PY{n}{curNode} \PY{o}{=} \PY{n}{nodeQueue}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} if node is not pure:}
+             \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{labels}\PY{p}{)}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} decide where to split}
+                 \PY{n}{bestSplit} \PY{o}{=} \PY{n}{splitData}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{rule}\PY{p}{,}\PY{n}{curNode}\PY{o}{.}\PY{n}{labels}\PY{p}{)}
+             
+                 \PY{c+c1}{\PYZsh{} split data via the new rule}
+                 \PY{p}{(}\PY{n}{left}\PY{p}{,}\PY{n}{right}\PY{p}{,}\PY{n}{leftLabel}\PY{p}{,}\PY{n}{rightLabel}\PY{p}{)} \PY{o}{=} \PY{n}{setSplit}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{rule}\PY{p}{,}\PY{n}{bestSplit}\PY{p}{,}\PY{n}{curNode}\PY{o}{.}\PY{n}{labels}\PY{p}{)}
+                
+                 \PY{c+c1}{\PYZsh{} create node children}
+                 \PY{n}{leftNode} \PY{o}{=} \PY{n}{Node}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{rightNode} \PY{o}{=} \PY{n}{Node}\PY{p}{(}\PY{p}{)}
+             
+                 \PY{c+c1}{\PYZsh{} sign data/labels to children}
+                 \PY{n}{leftNode}\PY{o}{.}\PY{n}{rule} \PY{o}{=} \PY{n}{left}
+                 \PY{n}{leftNode}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{n}{leftLabel}
+                 \PY{n}{rightNode}\PY{o}{.}\PY{n}{rule} \PY{o}{=} \PY{n}{right}
+                 \PY{n}{rightNode}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{n}{rightLabel}
+             
+                 \PY{n}{leftNode}\PY{o}{.}\PY{n}{parent} \PY{o}{=} \PY{n}{curNode}
+                 \PY{n}{rightNode}\PY{o}{.}\PY{n}{parent} \PY{o}{=} \PY{n}{curNode}
+                 
+                 \PY{n}{leftNode}\PY{o}{.}\PY{n}{side} \PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{n}{rightNode}\PY{o}{.}\PY{n}{side} \PY{o}{=} \PY{l+m+mi}{0}
+                 
+                 \PY{c+c1}{\PYZsh{} change rule to splitting rule instead of data}
+                 \PY{n}{curNode}\PY{o}{.}\PY{n}{rule} \PY{o}{=} \PY{n}{bestSplit}
+                 \PY{c+c1}{\PYZsh{} count labels of how many data points were split in the node}
+                 \PY{n}{curNode}\PY{o}{.}\PY{n}{labelsCount} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{labels}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} assign children to current node}
+                 \PY{n}{curNode}\PY{o}{.}\PY{n}{left\PYZus{}child} \PY{o}{=} \PY{n}{leftNode}
+                 \PY{n}{curNode}\PY{o}{.}\PY{n}{right\PYZus{}child} \PY{o}{=} \PY{n}{rightNode}  
+             
+                 \PY{c+c1}{\PYZsh{} put new nodes in queue if len \PYZgt{} 1}
+                 \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{leftNode}\PY{o}{.}\PY{n}{rule}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{nodeQueue}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{leftNode}\PY{p}{)}
+                 \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{rightNode}\PY{o}{.}\PY{n}{rule}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{nodeQueue}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{rightNode}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n+nb}{set}\PY{p}{(}\PY{n}{id3Tree}\PY{o}{.}\PY{n}{root}\PY{o}{.}\PY{n}{left\PYZus{}child}\PY{o}{.}\PY{n}{left\PYZus{}child}\PY{o}{.}\PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} \{1.0\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{rootNode}\PY{o}{.}\PY{n}{labelsCount}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} 2000
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{calcError}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{tree}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} init prediction}
+             \PY{n}{pred} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{c+c1}{\PYZsh{} predict training data}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{curNode} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{root}
+             
+                 \PY{k}{while}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{right\PYZus{}child} \PY{o}{!=} \PY{k+kc}{None} \PY{o+ow}{and} \PY{n}{curNode}\PY{o}{.}\PY{n}{left\PYZus{}child} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{curNode}\PY{o}{.}\PY{n}{rule}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{n}{curNode}\PY{o}{.}\PY{n}{rule}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{curNode} \PY{o}{=} \PY{n}{curNode}\PY{o}{.}\PY{n}{left\PYZus{}child}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{curNode} \PY{o}{=} \PY{n}{curNode}\PY{o}{.}\PY{n}{right\PYZus{}child}
+                     
+                 \PY{n}{nodeLabels} \PY{o}{=} \PY{n}{curNode}\PY{o}{.}\PY{n}{labels}
+                 \PY{c+c1}{\PYZsh{} if there is only one label type in labels}
+                 \PY{k}{if}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{nodeLabels}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{pred}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{nodeLabels}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} if there is more than one label predict majority}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{c+c1}{\PYZsh{} count number of 1 or 0}
+                     \PY{n}{countOne} \PY{o}{=} \PY{n}{nodeLabels}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+                     \PY{n}{countZero} \PY{o}{=} \PY{n}{nodeLabels}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{} append correct label predicted}
+                     \PY{k}{if}\PY{p}{(}\PY{n}{countOne} \PY{o}{\PYZgt{}} \PY{n}{countZero}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{pred}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{pred}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+                         
+             \PY{c+c1}{\PYZsh{} caluclate training error}
+             \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range} \PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{pred}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{pred}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{n}{labels}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+             
+             \PY{c+c1}{\PYZsh{} do computation for error}
+             \PY{n}{err} \PY{o}{=} \PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pred}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{n}{counter}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{pred}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{err}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{trainErr} \PY{o}{=} \PY{n}{calcError}\PY{p}{(}\PY{n}{trainData}\PY{p}{,} \PY{n}{trainLabel}\PY{p}{,} \PY{n}{id3Tree}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{trainErr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 0.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{testErr} \PY{o}{=} \PY{n}{calcError}\PY{p}{(}\PY{n}{testData}\PY{p}{,} \PY{n}{testLabel}\PY{p}{,} \PY{n}{id3Tree}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{testErr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 0.186
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{valErr} \PY{o}{=} \PY{n}{calcError}\PY{p}{(}\PY{n}{valData}\PY{p}{,} \PY{n}{valLabel}\PY{p}{,} \PY{n}{id3Tree}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{valErr}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 0.193
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c+c1}{\PYZsh{} make a new copy of tree to prune}
+         \PY{n}{toPrune} \PY{o}{=} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{id3Tree}\PY{p}{)}
+         \PY{n}{numPrune} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{bfsQueue} \PY{o}{=} \PY{n}{Queue}\PY{p}{(}\PY{p}{)}
+         \PY{n}{bfsQueue}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{toPrune}\PY{o}{.}\PY{n}{root}\PY{o}{.}\PY{n}{left\PYZus{}child}\PY{p}{)}
+         \PY{n}{bfsQueue}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{toPrune}\PY{o}{.}\PY{n}{root}\PY{o}{.}\PY{n}{right\PYZus{}child}\PY{p}{)}
+         \PY{n}{postPrune} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c+c1}{\PYZsh{} only prune 2 nodes}
+         \PY{k}{while}\PY{p}{(}\PY{n}{numPrune} \PY{o}{!=} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}print(\PYZdq{}size queue before pop\PYZdq{} + str(bfsQueue.qsize()))}
+             \PY{c+c1}{\PYZsh{} grab a node from queue}
+             \PY{n}{curNode} \PY{o}{=} \PY{n}{bfsQueue}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)}
+             \PY{n}{origNode} \PY{o}{=} \PY{n}{deepcopy}\PY{p}{(}\PY{n}{curNode}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{} count number of each label at node}
+             \PY{n}{numCounts} \PY{o}{=} \PY{n}{Counter}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{labels}\PY{p}{)}
+             \PY{n}{numZero} \PY{o}{=} \PY{n}{numCounts}\PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}
+             \PY{n}{numOne} \PY{o}{=} \PY{n}{numCounts}\PY{p}{[}\PY{l+m+mf}{1.1}\PY{p}{]}
+             
+             \PY{c+c1}{\PYZsh{} assign the majority label to predict that one}
+             \PY{k}{if}\PY{p}{(}\PY{n}{numOne} \PY{o}{==} \PY{n}{numZero}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{curNode}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{]}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{curNode}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}
+             \PY{k}{elif}\PY{p}{(}\PY{n}{numOne} \PY{o}{\PYZgt{}} \PY{n}{numZero}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{curNode}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{1.0}\PY{p}{]}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{curNode}\PY{o}{.}\PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+m+mf}{0.0}\PY{p}{]}
+                 
+             \PY{c+c1}{\PYZsh{} Make current node a leaf}
+             \PY{n}{curNode}\PY{o}{.}\PY{n}{left\PYZus{}child} \PY{o}{=} \PY{k+kc}{None}
+             \PY{n}{curNode}\PY{o}{.}\PY{n}{right\PYZus{}child} \PY{o}{=} \PY{k+kc}{None}
+         
+             \PY{c+c1}{\PYZsh{}print(\PYZdq{}majority pred: \PYZdq{} + str(curNode.labels))}
+             
+             \PY{c+c1}{\PYZsh{}print(\PYZdq{}toprune rule: \PYZdq{} + str(toPrune.root.labels))}
+             \PY{c+c1}{\PYZsh{} calculate new error on new prunned tree}
+             \PY{n}{newValErr} \PY{o}{=} \PY{n}{calcError}\PY{p}{(}\PY{n}{valData}\PY{p}{,}\PY{n}{valLabel}\PY{p}{,}\PY{n}{toPrune}\PY{p}{)}
+             
+             \PY{c+c1}{\PYZsh{}print(\PYZdq{}newValerr: \PYZdq{} + str(newValErr))}
+         
+             \PY{c+c1}{\PYZsh{} if the new error is less than old error}
+             \PY{k}{if}\PY{p}{(}\PY{n}{newValErr} \PY{o}{\PYZlt{}} \PY{n}{valErr}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valErr: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{valErr}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{newValerr: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{newValErr}\PY{p}{)} \PY{p}{)}
+                 \PY{n}{newTestErr} \PY{o}{=} \PY{n}{calcError}\PY{p}{(}\PY{n}{testData}\PY{p}{,}\PY{n}{testLabel}\PY{p}{,}\PY{n}{toPrune}\PY{p}{)}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{newtesterr: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{newTestErr}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{postPrune}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{newValErr}\PY{p}{,}\PY{n}{newTestErr}\PY{p}{)}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} increase count}
+                 \PY{n}{numPrune} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{c+c1}{\PYZsh{} set original tree to new prune tree}
+                 \PY{n}{id3Tree} \PY{o}{=} \PY{n}{toPrune}
+                 \PY{c+c1}{\PYZsh{} set val error to new lower error}
+                 \PY{n}{valErr} \PY{o}{=} \PY{n}{newValErr}
+             \PY{c+c1}{\PYZsh{} if the error is greater than original}
+             \PY{k}{else}\PY{p}{:} 
+                 \PY{c+c1}{\PYZsh{} replace new node with old node}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{side} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{curNode}\PY{o}{.}\PY{n}{parent}\PY{o}{.}\PY{n}{left\PYZus{}child} \PY{o}{=} \PY{n}{origNode}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{curNode}\PY{o}{.}\PY{n}{parent}\PY{o}{.}\PY{n}{right\PYZus{}child} \PY{o}{=} \PY{n}{origNode}
+                 
+                 \PY{c+c1}{\PYZsh{} print(\PYZdq{}curNode set as orig labels: \PYZdq{}+ str(curNode.labels))}
+                 \PY{c+c1}{\PYZsh{} if current node has a children put it in queue}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{origNode}\PY{o}{.}\PY{n}{left\PYZus{}child} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{bfsQueue}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{origNode}\PY{o}{.}\PY{n}{left\PYZus{}child}\PY{p}{)}
+                 \PY{k}{if}\PY{p}{(}\PY{n}{origNode}\PY{o}{.}\PY{n}{right\PYZus{}child} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{bfsQueue}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{origNode}\PY{o}{.}\PY{n}{right\PYZus{}child}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+valErr: 0.193newValerr: 0.121
+newtesterr: 0.127
+valErr: 0.121newValerr: 0.12
+newtesterr: 0.127
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{postPrune}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} [(0.121, 0.127), (0.12, 0.127)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{c+c1}{\PYZsh{} get all rules from all non leaf nodes}
+         \PY{n}{q} \PY{o}{=} \PY{n}{Queue}\PY{p}{(}\PY{p}{)}
+         \PY{n}{q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{id3Tree}\PY{o}{.}\PY{n}{root}\PY{p}{)}
+         \PY{n}{allRules} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{while}\PY{p}{(}\PY{n}{q}\PY{o}{.}\PY{n}{qsize}\PY{p}{(}\PY{p}{)} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+             \PY{n}{curNode} \PY{o}{=} \PY{n}{q}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{)}
+             \PY{k}{if}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{left\PYZus{}child} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{allRules}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{rule}\PY{p}{)}
+             \PY{k}{if}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{left\PYZus{}child} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{left\PYZus{}child}\PY{p}{)}
+             \PY{k}{if}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{right\PYZus{}child} \PY{o}{!=} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{q}\PY{o}{.}\PY{n}{put}\PY{p}{(}\PY{n}{curNode}\PY{o}{.}\PY{n}{right\PYZus{}child}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{allRules}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} [(0.5, 0.3299390039689053, 4),
+          (0.5, 0.22480644977952097, 7),
+          (0.5, 0.25999770148417206, 2),
+          (-18.0, 0.154789951406783, 13),
+          (1.0, 0.3724643483246227, 9),
+          (-2213.0, 0.21783592704328936, 12),
+          (0.5, 0.15474444816683164, 2),
+          (1.0, 0.39012135209543813, 8),
+          (0.5, 0.21249888880230233, 20),
+          (1.0, 0.09330230429676277, 9),
+          (1.0, 0.15437589825352815, 9),
+          (1.0, 0.3699813924755972, 6),
+          (1.0, 0.5608430558410471, 5),
+          (1.0, 0.3143074878196602, 8),
+          (1.0, 0.1580133801953386, 8),
+          (1.5, 0.14409843870454572, 1),
+          (1.0, 0.26579661801650545, 6),
+          (1.5, 0.07533940311598857, 21),
+          (1.0, 0.35902395969116296, 5),
+          (1.5, 0.35533180690739113, 4),
+          (1.5, -0.0, 4),
+          (1.0, 0.3336288495451112, 5),
+          (1.0, 0.12933672295781606, 6),
+          (1.0, 0.3637058873913608, 5),
+          (1.0, 0.2518187035388552, 5),
+          (1.0, 0.28378512849014564, 5),
+          (1.5, 0.1841272816047167, 3),
+          (1.5, 0.22653722100178036, 4),
+          (1.5, 0.39703564768121974, 1),
+          (1.5, 0.4206322918807853, 1),
+          (0.5, 0.20929925750581915, 17),
+          (-21.0, 0.38345812971759524, 12),
+          (-59.5, 0.18033239816802515, 15),
+          (0.5, 0.08999695416624902, 5),
+          (1.0, 0.19413395201038552, 9),
+          (1.0, 0.48808902141574073, 9),
+          (1.5, 0.2577690054493553, 3),
+          (1.5, -0.0, 1),
+          (1.0, 0.2607159395616988, 8),
+          (1.5, 0.27272958581590145, 1),
+          (-900.0, 0.49580606164146607, 12),
+          (1.5, 0.5234858900121001, 4),
+          (1.5, 0.22528060443315231, 4),
+          (1.5, 0.6591673732008658, 3),
+          (1.5, 0.3003741392442031, 1),
+          (-1.0, 0.3739567860443292, 12),
+          (-151.0, -0.0, 15),
+          (1.0, 0.11751539498479911, 6),
+          (1.0, 0.14917863977015877, 9),
+          (1.5, 0.12557955450349148, 4),
+          (1.5, 0.25020121176909393, 1),
+          (1.5, 0.6059391565991873, 1),
+          (1.0, 0.3588517785023579, 6),
+          (1.5, 0.29552997581040746, 4),
+          (1.5, 0.1659341498622544, 3),
+          (1.5, 0.20784159708275227, 4),
+          (1.5, 0.19585899164133183, 4),
+          (2.5, 0.19095425048844383, 7),
+          (-2057.0, 0.5553311836862668, 10),
+          (1.5, 0.5941261547656673, 3),
+          (1055.5, 0.3182570841474064, 20),
+          (240.0, -0.0, 16),
+          (-1.0, 0.46209812037329684, 10),
+          (2.5, -0.0, 3),
+          (1.0, 0.3759649154306351, 6),
+          (1.0, 0.23185856077319186, 9),
+          (1.5, 0.12249256546920573, 4),
+          (1.0, 0.33490681000572153, 5),
+          (1.5, 0.38190850097688767, 3),
+          (1.5, -0.0, 3),
+          (1.5, 0.34657359027997264, 3),
+          (1.5, 0.19804205158855578, 1),
+          (2.5, 0.3014161290051494, 8),
+          (1.5, 0.23560468033653129, 1),
+          (1.5, 0.5941261547656673, 1),
+          (2.5, 0.24149914327594518, 4),
+          (1.5, 0.6059391565991873, 4),
+          (-97.0, 0.476735579151889, 10),
+          (7.0, 0.4773856262211096, 16),
+          (1010.0, 0.46209812037329684, 21),
+          (1094.5, -0.0, 20),
+          (1.5, -0.0, 5),
+          (1.5, 0.32854789528597717, 1),
+          (1.5, 0.17328679513998632, 3),
+          (-1.5, 0.2698201404404767, 10),
+          (1.5, 0.3127515147113674, 3),
+          (161.5, 0.46209812037329684, 21),
+          (1.5, -0.0, 4),
+          (1.5, -0.0, 3),
+          (700.0, 0.17328679513998632, 17),
+          (2.5, 0.3336016156921252, 18),
+          (2.5, 0.46209812037329684, 7),
+          (1.5, 0.4773856262211096, 3),
+          (2.5, 0.31897935866876254, 6),
+          (2.5, -0.0, 9),
+          (2.5, 0.34657359027997264, 6),
+          (-4.0, 0.49985346188338514, 10),
+          (140.5, -0.0, 18),
+          (2560.0, -0.0, 21),
+          (1.0, 0.5047548875545029, 9),
+          (580.0, -0.0, 18),
+          (-7.5, -0.0, 10),
+          (1.5, 0.19621805391170546, 1),
+          (1.5, 0.5004024235381879, 1),
+          (915.0, -0.0, 20),
+          (930.0, -0.0, 19),
+          (2.5, 0.476735579151889, 3),
+          (500.0, -0.0, 17),
+          (2.5, 0.46209812037329684, 7),
+          (2.5, 0.38619532188540395, 9),
+          (3.5, -0.0, 9),
+          (1.5, 0.34657359027997264, 1),
+          (1.5, 0.472375452385301, 4),
+          (1.5, 0.46209812037329684, 3),
+          (2.5, 0.3420877484057018, 3),
+          (2.0, 0.44986811569504664, 17),
+          (500.0, 0.44986811569504664, 17),
+          (2.5, 0.49985346188338514, 4),
+          (900.0, -0.0, 18),
+          (1150.0, 0.23104906018664842, 18),
+          (1.5, -0.0, 3),
+          (-46.5, 0.5017702400862073, 10),
+          (753.5, -0.0, 15),
+          (1.5, 0.36197942074345774, 3),
+          (2800.0, -0.0, 18),
+          (1713.5, 0.34657359027997264, 20),
+          (1.5, 0.5514443278219222, 4),
+          (2300.0, -0.0, 20),
+          (2.5, 0.45352456031619226, 3),
+          (111.0, 0.3003741392442031, 11),
+          (953.5, 0.28116757230940415, 15),
+          (3056.0, -0.0, 20),
+          (2.5, 0.46209812037329684, 5),
+          (2.5, 0.44986811569504664, 6),
+          (1.5, 0.4654686187721906, 3),
+          (503.5, 0.3182570841474064, 21),
+          (1198.0, 0.34657359027997264, 10),
+          (500.0, -0.0, 21),
+          (1812.0, 0.34657359027997264, 19),
+          (31.0, 0.2518187035388552, 19),
+          (120.5, 0.34657359027997264, 11),
+          (1594.5, 0.46209812037329684, 20),
+          (608.0, -0.0, 11),
+          (1750.0, -0.0, 16),
+          (90.5, 0.2500638256857294, 17),
+          (114.5, 0.4773856262211096, 12),
+          (2275.0, -0.0, 21),
+          (995.0, 0.31394888625872874, 13),
+          (399.5, -0.0, 13),
+          (1418.5, 0.15403270679109896, 21),
+          (2326.5, -0.0, 21)]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../pa2features.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+             \PY{n}{feat} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{readlines}\PY{p}{(}\PY{p}{)}
+         \PY{n}{feat} \PY{o}{=} \PY{p}{[}\PY{n}{x}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{test}\PY{p}{]} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{feat}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} ['LIMIT\_BAL',
+          'SEX',
+          'COLLEGE\_ABOVE',
+          'AGE',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_AUGUST',
+          'PAYMENT\_DELAY\_JULY',
+          'PAYMENT\_DELAY\_JUNE',
+          'PAYMENT\_DELAY\_MAY',
+          'PAYMENT\_DELAY\_APRIL',
+          'BILL\_AMT1',
+          'BILL\_AMT2',
+          'BILL\_AMT3',
+          'BILL\_AMT4',
+          'BILL\_AMT5',
+          'BILL\_AMT6',
+          'PAY\_AMT1',
+          'PAY\_AMT2',
+          'PAY\_AMT3',
+          'PAY\_AMT4',
+          'PAY\_AMT5',
+          'PAY\_AMT6']
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{topFeat} \PY{o}{=} \PY{p}{[}\PY{n}{feat}\PY{p}{[}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{allRules}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{topFeat}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} ['PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_JUNE',
+          'COLLEGE\_ABOVE',
+          'BILL\_AMT4',
+          'PAYMENT\_DELAY\_APRIL',
+          'BILL\_AMT3',
+          'COLLEGE\_ABOVE',
+          'PAYMENT\_DELAY\_MAY',
+          'PAY\_AMT5',
+          'PAYMENT\_DELAY\_APRIL',
+          'PAYMENT\_DELAY\_APRIL',
+          'PAYMENT\_DELAY\_JULY',
+          'PAYMENT\_DELAY\_AUGUST',
+          'PAYMENT\_DELAY\_MAY',
+          'PAYMENT\_DELAY\_MAY',
+          'SEX',
+          'PAYMENT\_DELAY\_JULY',
+          'PAY\_AMT6',
+          'PAYMENT\_DELAY\_AUGUST',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_AUGUST',
+          'PAYMENT\_DELAY\_JULY',
+          'PAYMENT\_DELAY\_AUGUST',
+          'PAYMENT\_DELAY\_AUGUST',
+          'PAYMENT\_DELAY\_AUGUST',
+          'AGE',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'SEX',
+          'SEX',
+          'PAY\_AMT2',
+          'BILL\_AMT3',
+          'BILL\_AMT6',
+          'PAYMENT\_DELAY\_AUGUST',
+          'PAYMENT\_DELAY\_APRIL',
+          'PAYMENT\_DELAY\_APRIL',
+          'AGE',
+          'SEX',
+          'PAYMENT\_DELAY\_MAY',
+          'SEX',
+          'BILL\_AMT3',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'AGE',
+          'SEX',
+          'BILL\_AMT3',
+          'BILL\_AMT6',
+          'PAYMENT\_DELAY\_JULY',
+          'PAYMENT\_DELAY\_APRIL',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'SEX',
+          'SEX',
+          'PAYMENT\_DELAY\_JULY',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'AGE',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_JUNE',
+          'BILL\_AMT1',
+          'AGE',
+          'PAY\_AMT5',
+          'PAY\_AMT1',
+          'BILL\_AMT1',
+          'AGE',
+          'PAYMENT\_DELAY\_JULY',
+          'PAYMENT\_DELAY\_APRIL',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_AUGUST',
+          'AGE',
+          'AGE',
+          'AGE',
+          'SEX',
+          'PAYMENT\_DELAY\_MAY',
+          'SEX',
+          'SEX',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'BILL\_AMT1',
+          'PAY\_AMT1',
+          'PAY\_AMT6',
+          'PAY\_AMT5',
+          'PAYMENT\_DELAY\_AUGUST',
+          'SEX',
+          'AGE',
+          'BILL\_AMT1',
+          'AGE',
+          'PAY\_AMT6',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'AGE',
+          'PAY\_AMT2',
+          'PAY\_AMT3',
+          'PAYMENT\_DELAY\_JUNE',
+          'AGE',
+          'PAYMENT\_DELAY\_JULY',
+          'PAYMENT\_DELAY\_APRIL',
+          'PAYMENT\_DELAY\_JULY',
+          'BILL\_AMT1',
+          'PAY\_AMT3',
+          'PAY\_AMT6',
+          'PAYMENT\_DELAY\_APRIL',
+          'PAY\_AMT3',
+          'BILL\_AMT1',
+          'SEX',
+          'SEX',
+          'PAY\_AMT5',
+          'PAY\_AMT4',
+          'AGE',
+          'PAY\_AMT2',
+          'PAYMENT\_DELAY\_JUNE',
+          'PAYMENT\_DELAY\_APRIL',
+          'PAYMENT\_DELAY\_APRIL',
+          'SEX',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'AGE',
+          'AGE',
+          'PAY\_AMT2',
+          'PAY\_AMT2',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAY\_AMT3',
+          'PAY\_AMT3',
+          'AGE',
+          'BILL\_AMT1',
+          'BILL\_AMT6',
+          'AGE',
+          'PAY\_AMT3',
+          'PAY\_AMT5',
+          'PAYMENT\_DELAY\_SEPTEMBER',
+          'PAY\_AMT5',
+          'AGE',
+          'BILL\_AMT2',
+          'BILL\_AMT6',
+          'PAY\_AMT5',
+          'PAYMENT\_DELAY\_AUGUST',
+          'PAYMENT\_DELAY\_JULY',
+          'AGE',
+          'PAY\_AMT6',
+          'BILL\_AMT1',
+          'PAY\_AMT6',
+          'PAY\_AMT4',
+          'PAY\_AMT4',
+          'BILL\_AMT2',
+          'PAY\_AMT5',
+          'BILL\_AMT2',
+          'PAY\_AMT1',
+          'PAY\_AMT2',
+          'BILL\_AMT3',
+          'PAY\_AMT6',
+          'BILL\_AMT4',
+          'BILL\_AMT4',
+          'PAY\_AMT6',
+          'PAY\_AMT6']
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
